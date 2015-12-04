@@ -47,11 +47,12 @@ float fractalNoise(float x, float y, float z) {
 
 void draw() {
   long now = millis();
-  float speed = 0.002;
-  float angle = sin(now * .0001);
+  float speed = 0.002; //wind speed, reasonable is 0.002
+  float angle = sin(now * .0001); // angle the wind blows the mist at
   float z = now * 0.00008;
-  float hue = now * 0.01;
-  float scale = 0.005;
+  float hue = now  * 0.001; // how the hue cycles, reasonable is 0.01
+  //float scale = 0.005;
+  float scale = 0.003; // how large the fractal globs are
 
   dx += cos(angle) * speed;
   dy += sin(angle) * speed;
@@ -65,7 +66,7 @@ void draw() {
       float m = fractalNoise(dx + x*scale, dy + y*scale, z + 10.0);
 
       float h = (hue + 100.0 * m) % 100.0;
-      float s = 100-100*n;
+      float s = 100-50*n;  // vary intensity from 50% to 100%, more or less
       //float s = 100 - 100 * constrain(pow(3.0 * n, 3.5), 0.0, 0.5); // less bright, more reasonable
       //float s = 100;  // eye searing
       float b = 100 * constrain(pow(3.0 * n, 1.5), 0.0, 0.9);
