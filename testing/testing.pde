@@ -1,31 +1,25 @@
+/*
+This generates a random fractal mist over a grid of pixels
+*/
+
 OPC opc;
 float dx, dy;
 
+
 void setup()
 {
-  size(240,80);
+  size(128,128);
+  // setup a grid
+  int nPixels = 64;
+  int nPixelsPerRow = floor(sqrt(nPixels));
+  int spacing = floor(height/(1+nPixelsPerRow));
+  int marginL = spacing;
+  int marginT = spacing;
 
+  
   // Connect to the local instance of fcserver. You can change this line to connect to another computer's fcserver
   opc = new OPC(this, "127.0.0.1", 7890);
-
-  // Map an 8x8 grid of LEDs to the center of the window, scaled to take up most of the space
-  //float spacing = height / 10.0;
   
-  /*
-  opc.ledGrid8x8(0, width/2, height/2, spacing, 0, true);
-
-  // Put two more 8x8 grids to the left and to the right of that one.
-  opc.ledGrid8x8(64, width/2 - spacing * 8, height/2, spacing, 0, true);
-  opc.ledGrid8x8(128, width/2 + spacing * 8, height/2, spacing, 0, true);
-  */
-  
-  // drop some pixels, bruh
-    float spacing = height / 10.0;
-
-  int marginL = width/4;
-  int marginT = height/10;
-  int nPixels = 64;
-  int nPixelsPerRow = nPixels/8;
   for (int i = 0; i < nPixels; i++){
     opc.led(i, marginL + (i+1)%nPixelsPerRow*int(spacing), marginT + ((i/nPixelsPerRow)%nPixelsPerRow)*int(spacing));
   }
