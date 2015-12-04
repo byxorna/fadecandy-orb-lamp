@@ -48,12 +48,12 @@ void draw() {
   float speed = 0.004; //wind speed, reasonable is 0.002
   float angle = PI; // PI=right, PI/2=up
   float hue = now  * speed;
-
+  float bandWidth = 4;
   dx += cos(angle) ;
   dy += sin(angle) ;
   loadPixels();
   for (int x=0; x < width; x++) {
-    float h = (hue+x) % 100.0;
+    float h = (hue+x/bandWidth) % 100.0;
     for (int y=0; y < height; y++) {
       float s = 100;
       float b = 100;
