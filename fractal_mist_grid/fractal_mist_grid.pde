@@ -31,6 +31,7 @@ void setup()
 
 float noiseScale=0.02;
 
+// generates some noise between 0.0 and 1.0
 float fractalNoise(float x, float y, float z) {
   float r = 0;
   float amp = 1.0;
@@ -50,7 +51,7 @@ void draw() {
   float angle = sin(now * .0001);
   float z = now * 0.00008;
   float hue = now * 0.01;
-  float scale = 0.005;  //float scale = 0.005;
+  float scale = 0.005;
 
   dx += cos(angle) * speed;
   dy += sin(angle) * speed;
@@ -59,18 +60,16 @@ void draw() {
     for (int y=0; y < height; y++) {
      
       float n = fractalNoise(dx + x*scale, dy + y*scale, z);
-            //float n = fractalNoise(dx + x*scale, dy + y*scale, z) - 0.75;
+      //float n = fractalNoise(dx + x*scale, dy + y*scale, z) - 0.75;
 
       float m = fractalNoise(dx + x*scale, dy + y*scale, z + 10.0);
 
-
-      color c = color(
-         (hue + 100.0 * m) % 100.0,
-         100 - 100 * constrain(pow(3.0 * n, 3.5), 0.0, 0.9),
-         100 * constrain(pow(3.0 * n, 1.5), 0.0, 0.9)
-         );
-
-      
+      float h = (hue + 100.0 * m) % 100.0;
+      float s = 100-100*n;
+      //float s = 100 - 100 * constrain(pow(3.0 * n, 3.5), 0.0, 0.5); // less bright, more reasonable
+      //float s = 100;  // eye searing
+      float b = 100 * constrain(pow(3.0 * n, 1.5), 0.0, 0.9);
+      color c = color(h,s,b);
       pixels[x + width*y] = c;
     }
   }
