@@ -3,8 +3,9 @@ This generates a line that rotates around and constantly changes color
 */
 
 OPC opc;
-float hue;
-float prevRasterPos;
+float hue = 0;
+float hueStep = 5.0;
+float prevRasterPos = -1.0;
 
 
 void setup()
@@ -31,34 +32,16 @@ void setup()
 }
 
 void draw() {
+  noStroke();
+  float speed = 0.1;
   long now = millis();
-  float speed = 0.09; //wind speed, reasonable is 0.09
-  float bandWidth = 10;
-  float hueStep = 10.0;
-
   float rasterPos = now*speed % width;
   if (rasterPos < prevRasterPos){
-    hue += hueStep;
+    hue = (hue+hueStep)%100;
   }
+  fill((hue+hueStep)%100,100,100);
+  rect(0,0, rasterPos, height);
+  fill(hue, 100, 100);
+  rect(rasterPos,0,width-rasterPos,height);
   prevRasterPos = rasterPos;
-
-
-  loadPixels();
-  for (int x=0; x < width; x++) {
-    float h;
-    if (x<rasterPos){
-      h = (hue+hueStep*constrain(1.0-x/(rasterPos+bandWidth),0.0,1.0)) % 100.0;
-    }else{
-      h = hue % 100.0;
-    }
-    for (int y=0; y < height; y++) {
-      float s = 100;
-      float b = 100;
-      color c = color(h,s,b);
-      pixels[x + width*y] = c;
-    }
-  }
-  
-  updatePixels();
 }
-
