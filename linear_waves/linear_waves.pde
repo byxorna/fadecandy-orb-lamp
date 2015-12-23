@@ -1,9 +1,8 @@
 /*
-This generates a waves that roll around a globe R->L
+This generates a waves that roll around a globe vertically
 */
 
 OPC opc;
-float dx, dy;
 
 
 void setup()
@@ -45,16 +44,14 @@ float fractalNoise(float x, float y, float z) {
 
 void draw() {
   long now = millis();
-  float speed = 0.004; //wind speed, reasonable is 0.002
-  float angle = PI; // PI=right, PI/2=up
+  float speed = 0.01;
   float hue = now  * speed;
   float bandWidth = 4;
-  dx += cos(angle) ;
-  dy += sin(angle) ;
+
   loadPixels();
-  for (int x=0; x < width; x++) {
-    float h = (hue+x/bandWidth) % 100.0;
-    for (int y=0; y < height; y++) {
+  for (int y=0; y < height; y++) {
+    float h = (hue+y/bandWidth) % 100.0;
+    for (int x=0; x < width; x++) {
       float s = 100;
       float b = 100;
       color c = color(h,s,b);
@@ -63,4 +60,3 @@ void draw() {
   }
   updatePixels();
 }
-
