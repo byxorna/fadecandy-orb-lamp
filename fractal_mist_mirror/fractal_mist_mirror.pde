@@ -8,23 +8,25 @@ float dx, dy;
 
 void setup()
 {
-  size(128,128);
-  // setup a grid
-  int nPixels = 64;
-  int nPixelsPerRow = floor(sqrt(nPixels));
+  size(128,64);
+  int nPixels = 128;
+  int nPixelsPerRow = 16;
   int spacing = floor(height/(1+nPixelsPerRow));
   int marginL = spacing;
   int marginT = spacing;
-
-  
-  // Connect to the local instance of fcserver. You can change this line to connect to another computer's fcserver
   opc = new OPC(this, "127.0.0.1", 7890);
   
+  for (int i = 0; i < nPixels/nPixelsPerRow; i++){
+    ledStrip(i*nPixelsPerRow, nPixelsPerRow, float(marginL + i*marginL), marginT, spacing, 0.0, false);
+  }
+  
+/*
   for (int i = 0; i < nPixels; i++){
     opc.led(i, marginL + (i+1)%nPixelsPerRow*int(spacing), marginT + ((i/nPixelsPerRow)%nPixelsPerRow)*int(spacing));
   }
+ */
   // Make the status LED quiet
-  opc.setStatusLed(false);
+  opc.setStatusLed(true);
   
   colorMode(HSB, 100);
 }
