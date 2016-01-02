@@ -8,24 +8,13 @@ float dx, dy;
 
 void setup()
 {
-  size(128,64);
-  int nPixels = 128;
-  int nPixelsPerRow = 16;
-  int spacing = floor(height/(1+nPixelsPerRow));
-  int marginL = spacing;
-  int marginT = spacing;
+  size(256,128);
+  // Connect to the local instance of fcserver. You can change this line to connect to another computer's fcserver
   opc = new OPC(this, "127.0.0.1", 7890);
-  
-  for (int i = 0; i < nPixels/nPixelsPerRow; i++){
-    ledStrip(i*nPixelsPerRow, nPixelsPerRow, float(marginL + i*marginL), marginT, spacing, 0.0, false);
-  }
-  
-/*
-  for (int i = 0; i < nPixels; i++){
-    opc.led(i, marginL + (i+1)%nPixelsPerRow*int(spacing), marginT + ((i/nPixelsPerRow)%nPixelsPerRow)*int(spacing));
-  }
- */
-  // Make the status LED quiet
+ 
+  float spacing = width/16.0;
+  opc.ledGrid8x8(0, width/4, height/2, spacing, PI/2, true);
+  opc.ledGrid8x8(64, width * 0.75, height/2, spacing, PI/2, true);
   opc.setStatusLed(true);
   
   colorMode(HSB, 100);
@@ -74,10 +63,11 @@ void draw() {
       float b = 100 * constrain(pow(3.0 * n, 1.5), 0.0, 0.9);
       color c = color(h,s,b);
       // reflect the image to the other half
-      int lpx = x + height*y;
-      int rpx = (width*height-1) - x - height*(height-y-1);
+      int lpx = x+y*width;
+      int rpx = (width/2+(width/2-x-1)) + y*width;
       pixels[lpx] = c;
       pixels[rpx] = c;
+      //pixels[rpx] = color(0,0,0);
     }
   }
   updatePixels();
