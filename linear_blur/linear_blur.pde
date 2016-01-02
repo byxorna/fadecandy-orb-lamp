@@ -10,23 +10,14 @@ float prevRasterPos = -1.0;
 
 void setup()
 {
-  size(128,128);
+  size(256,128);
   // Connect to the local instance of fcserver. You can change this line to connect to another computer's fcserver
   opc = new OPC(this, "127.0.0.1", 7890);
  
-   // setup a grid
-  int nPixels = 36;
-  int nPixelsPerRow = floor(sqrt(nPixels));
-  int spacing = floor(height/(1+nPixelsPerRow));
-  int marginL = spacing;
-  int marginT = spacing;
-  
-  for (int i = 0; i < nPixels; i++){
-    opc.led(i, marginL + (i+1)%nPixelsPerRow*int(spacing), marginT + ((i/nPixelsPerRow)%nPixelsPerRow)*int(spacing));
-  }
-
-  // Make the status LED quiet
-  opc.setStatusLed(false);
+  float spacing = width/16.0;
+  opc.ledGrid8x8(0, width/4, height/2, spacing, PI/2, true);
+  opc.ledGrid8x8(64, width * 0.75, height/2, spacing, PI/2, true);
+  opc.setStatusLed(true);
   
   colorMode(HSB, 100);
 }
