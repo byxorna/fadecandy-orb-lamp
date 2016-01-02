@@ -1,0 +1,7 @@
+{
+  "name": "fadecandy-orb-lamp",
+  "dependencies": {
+    "simplex-noise": "~2.2.0"
+  },
+  "private": true
+}
