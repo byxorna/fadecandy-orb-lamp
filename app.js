@@ -38,6 +38,12 @@ app.get('/start/:pattern', function (req, res) {
   res.send({message: "Running " + pattern });
 });
 
+app.get('/pause', function (req, res) {
+  console.log("Pausing");
+  orb.stop();
+  res.send({message:"Paused"});
+});
+
 app.get('/stop', function (req, res) {
   console.log("Stopping lightshow");
   orb.stop();

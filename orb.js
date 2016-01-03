@@ -4,8 +4,13 @@ module.exports = function(model,client){
     run: function(fn){
       return run(fn,model,client);
     },
-    stop: function(){
+    pause: function(){
       return clearInterval(interval);
+    },
+    stop: function(){
+      return run(function(m,c){
+        c.mapParticles([],m);
+      }, model, client);
     },
   };
 }

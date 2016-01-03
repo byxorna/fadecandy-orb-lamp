@@ -4,7 +4,7 @@
  */
 
 var model = []
-var scale = 1.0;
+var scale = 1/8.0; // keep the points bounded between -1.0 and 1.0
 //var scale = -1 / 8.0;
 
 /*
@@ -35,14 +35,7 @@ function grid8x8(index, x, z) {
 }
 
 var index = 0;
-for (var i = 0; i<2; i++){
-  grid8x8(index, i*8, 7);
-  index += 64;
-}
+grid8x8(0, -7.5, 3.5);
+grid8x8(64, 0.5, 3.5);
 
-/*
-for (var i = 0 ; i < model.length; i++){
-  console.log("index " + i + ": ", model[i]);
-}
-*/
 console.log(JSON.stringify(model));
