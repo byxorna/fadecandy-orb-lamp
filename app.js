@@ -27,6 +27,14 @@ for (var i = 0; i<patternFiles.length; i++){
 
 app.use(require('morgan')('combined'));
 app.use(express.static('public'));
+app.set('view engine', 'jade');
+
+app.get('/', function(req, res){
+  res.render('index', {
+    title: 'Fadecandy Orb',
+    patterns: Object.keys(patterns)
+  });
+});
 
 app.get('/start/:pattern', function (req, res) {
   var pattern = req.params.pattern;
