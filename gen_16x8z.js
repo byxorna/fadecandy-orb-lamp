@@ -5,33 +5,44 @@
 
 var model = []
 var scale = 1.0;
-var centerX = 0;
-var centerY = 0;
+//var scale = -1 / 8.0;
+
 /*
-var scale = -1 / 8.0;
-var centerX = 31 / 2.0;
-var centerY = 15 / 2.0;
+
+Z=7
+     
+^  _ Y=0
+|  /|
+| /
+|/
+0------> X=15
+
 */
 
-//TODO: this grid goes left to right, but should go top to bottom. change it
-function grid8x8(index, x, y) {
-    // Instance of a zig-zag 8x8 grid with upper-left corner at (x, y)
-    for (var v = 0; v < 8; v++) {
-        for (var u = 0; u < 8; u++) {
-            var px = (v & 1) ? (x+7-u) : (x+u);
-            var py = y + v;
-            model[index++] = {
-                point: [  (px - centerX) * scale, 0, (py - centerY) * scale ]
-            };
-            console.log("index " + (index-1) + ": ", model[index-1]);
-        }
+function grid8x8(index, x, z) {
+  // Instance of a zig-zag 8x8 grid with upper-left corner at (x, z)
+  for (var v = 0; v < 8; v++) {
+    for (var u = 0; u < 8; u++) {
+      var px = x+v;
+      // if odd
+      //var pz = (v & 1) ? z-(x+7-u) : z-(x+u);
+      var pz = (v & 1) ? z-7+u : z-u;
+      model[index++] = {
+        point: [  px * scale, 0, pz * scale ]
+      };
     }
+  }
 }
 
 var index = 0;
 for (var i = 0; i<2; i++){
-  grid8x8(index, i*8, 0);
+  grid8x8(index, i*8, 7);
   index += 64;
 }
 
+/*
+for (var i = 0 ; i < model.length; i++){
+  console.log("index " + i + ": ", model[i]);
+}
+*/
 console.log(JSON.stringify(model));

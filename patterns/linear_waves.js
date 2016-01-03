@@ -1,11 +1,8 @@
-#!/usr/bin/env node
 // this is aped from particle_trail.js: https://github.com/scanlime/fadecandy/blob/master/examples/node/particle_trail.js
 
-var OPC = new require('./opc');
-var model = OPC.loadModel(process.argv[2] || './layout_16x8z.json');
-var client = new OPC('localhost', 7890);
+var OPC = require('../opc');
 
-function draw() {
+module.exports = function draw(model, client) {
 
     //var time = 0.009 * new Date().getTime();
     var time = 0.001 * new Date().getTime();
@@ -32,6 +29,4 @@ function draw() {
     }
 
     client.mapParticles(particles, model);
-}
-
-setInterval(draw, 10);
+};
