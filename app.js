@@ -7,6 +7,7 @@ var layoutFile  = process.env['LAYOUT'] || process.argv[2] || './layout_16x8z.js
 var patterns = {};  // draw functions like {'waves': function(opc,model,client)}
 var OPC = new require('./opc');
 var express = require('express');
+var bodyParser = require('body-parser');
 var fs = require('fs');
 var app = express();
 
@@ -28,12 +29,21 @@ for (var i = 0; i<patternFiles.length; i++){
 app.use(require('morgan')('combined'));
 app.use(express.static('public'));
 app.set('view engine', 'jade');
+// to support JSON-encoded bodies
+app.use( bodyParser.json() );
+// to support URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function(req, res){
   res.render('index', {
     title: 'Fadecandy Orb',
     patterns: Object.keys(patterns)
   });
+});
+
+app.post('/', function(req, res){
+  console.log("Got post of ", req.body);
+  res.redirect('/');
 });
 
 app.get('/start/:pattern', function (req, res) {
