@@ -68,7 +68,7 @@ app.get('/start/:pattern', function (req, res) {
 
 app.get('/pause', function (req, res) {
   console.log("Pausing");
-  orb.stop();
+  orb.pause();
   res.send({message:"Paused"});
 });
 
