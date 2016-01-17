@@ -60,7 +60,7 @@ app.post('/', function(req, res){
   res.redirect('/');
 });
 
-app.post('/start/:pattern', function (req, res) {
+app.get('/start/:pattern', function (req, res) {
   var pattern = req.params.pattern;
   //TODO(gabe): parse any data from request, pass to draw fn
   console.log("Starting show! Have a good trip!", data);
@@ -81,6 +81,10 @@ app.get('/stop', function (req, res) {
   console.log("Stopping lightshow");
   orb.stop();
   res.send({message:"Stopped"});
+});
+
+app.post('/settings', function(req, res){
+  console.log("Got updated settings: ", req.body.data);
 });
 
 // handle errors last

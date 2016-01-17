@@ -8,16 +8,7 @@ html
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.0.5/bootstrap-slider.min.js")
     title!= title
-    style(type="text/css").
-      #r_slider > .slider-track > .slider-handle {
-        background: #e51c23;
-      }
-      #b_slider > .slider-track > .slider-handle {
-        background: #0d87e9;
-      }
-      #g_slider > .slider-track > .slider-handle {
-        background: #4caf50;
-      }
+    link(rel='stylesheet', href='/css/index.css')
   body
     div.content-area
       block content
@@ -39,27 +30,5 @@ html
     footer
       block footer
   script.
-    var throttle_color_change_ms = 200;
     var data = !{JSON.stringify(data)};
-    console.log("got data from server: " , data);
-
-    function handle_color_change(evt){
-      var slider = $(evt.currentTarget);
-      var channel = slider.attr('name');
-      //console.log("Got color change: ",channel, evt.value.newValue);
-      data[channel] = evt.value.newValue;
-    };
-    // throttle calls to this handler
-    var throttled_color_change = _.throttle(handle_color_change, throttle_color_change_ms);
-
-    $(function(){
-      $('input.colorslider').each(function(){
-        var s = $(this);
-        var sl = s.slider({
-          id: s.attr('name') + "_slider",
-          reversed: true,
-          tooltip: 'hide',
-        });
-        sl.on('change', throttled_color_change);
-      });
-    });
+  script(src="/js/index.js")
