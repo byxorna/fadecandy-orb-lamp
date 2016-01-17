@@ -11,7 +11,7 @@ var bounds = {
   minY: -0.5,
 };
 */
-module.exports = function draw(model, client) {
+module.exports = function draw(model, client, data) {
 
     var time = 0.001 * new Date().getTime();
     var numParticles = 100;

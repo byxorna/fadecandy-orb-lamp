@@ -1,8 +1,8 @@
 var interval = null;
 module.exports = function(model,client){
   return {
-    run: function(fn){
-      return run(fn,model,client);
+    run: function(fn, data){
+      return run(fn,model,client,data);
     },
     pause: function(){
       return clearInterval(interval);
@@ -15,8 +15,7 @@ module.exports = function(model,client){
   };
 }
 
-function run(fn, model, client){
+function run(fn, model, client, data){
   clearInterval(interval);
-  //console.log("Running",model,client);
-  interval = setInterval(fn, 10, model, client);
+  interval = setInterval(fn, 10, model, client, data);
 }

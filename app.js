@@ -21,9 +21,13 @@ var orb = require('./orb')(model, client);
 var patternFiles = fs.readdirSync(patternsDir);
 for (var i = 0; i<patternFiles.length; i++){
   var fName = patternsDir + "/" + patternFiles[i];
-  var name = patternFiles[i].replace(/\.[^/.]+$/, "");
-  console.log("Loading pattern: " + fName + " as " + name);
-  patterns[name] = require(fName);
+  if (patternFiles[i].match(/^\w+\.js$/)) {
+    var name = patternFiles[i].replace(/\.[^/.]+$/, "");
+    console.log("Loading pattern: " + fName + " as " + name);
+    patterns[name] = require(fName);
+  } else {
+    console.log("Ignoring shady file: " + fName);
+  }
 }
 
 app.use(require('morgan')('combined'));
@@ -48,11 +52,17 @@ app.post('/', function(req, res){
 
 app.get('/start/:pattern', function (req, res) {
   var pattern = req.params.pattern;
-  console.log("Starting show! Have a good trip!");
+  //TODO(gabe): parse any data from request, pass to draw fn
+  var data = {
+    r: 100,
+    g: 75,
+    b: 200,
+  };
+  console.log("Starting show! Have a good trip!", data);
   if (!patterns[pattern]) {
     throw "No pattern found named " + pattern;
   }
-  orb.run( patterns[pattern]);
+  orb.run( patterns[pattern], data);
   res.send({message: "Running " + pattern });
 });
 
