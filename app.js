@@ -4,7 +4,17 @@ var layoutFile  = process.env['LAYOUT'] || process.argv[2] || './layout_16x8z.js
     port        = process.env['PORT'] || 3000,
     patternsDir = process.env['PATTERNS_DIRECTORY'] || './patterns';
 
-var patterns = {};  // draw functions like {'waves': function(opc,model,client)}
+// draw functions like {'waves': function(opc,model,client,data)}
+var patterns = {};
+// global state of the orb.
+// any parameters you want passed into draw functions should be in
+// here, set by any client.
+var data = {
+  r: 100,
+  g: 75,
+  b: 200,
+};
+
 var OPC = new require('./opc');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -14,7 +24,6 @@ var app = express();
 console.log("Loading layout " + layoutFile);
 var model = OPC.loadModel(layoutFile);
 var client = new OPC(opcHost, opcPort);
-
 var orb = require('./orb')(model, client);
 
 // load all the patterns available
@@ -41,7 +50,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', function(req, res){
   res.render('index', {
     title: 'Fadecandy Orb',
-    patterns: Object.keys(patterns)
+    patterns: Object.keys(patterns),
+    data: data,
   });
 });
 
@@ -50,14 +60,9 @@ app.post('/', function(req, res){
   res.redirect('/');
 });
 
-app.get('/start/:pattern', function (req, res) {
+app.post('/start/:pattern', function (req, res) {
   var pattern = req.params.pattern;
   //TODO(gabe): parse any data from request, pass to draw fn
-  var data = {
-    r: 100,
-    g: 75,
-    b: 200,
-  };
   console.log("Starting show! Have a good trip!", data);
   if (!patterns[pattern]) {
     throw "No pattern found named " + pattern;
