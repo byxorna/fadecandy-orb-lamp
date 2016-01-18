@@ -14,14 +14,17 @@ html
       block content
         div.message.alert(role="alert" style="display:none;")
 
-        form(id='settings' method="post" action="update")
+        form.form-inline(id='settings' method="post" action="update")
           each ch in ['r','g','b']
-            input.colorslider(type="text",name=ch,data-slider-min="0",data-slider-max="255",data-slider-step=1, data-slider-value=data.color[ch], data-slider-orientation="vertical")
+            .input-group.well
+              input.colorslider(type="text",name=ch,data-slider-min="0",data-slider-max="255",data-slider-step=1, data-slider-value=data.color[ch], data-slider-orientation="vertical")
 
         form(id='stop' method="get" action="stop")
-          button(type="submit" class="btn btn-default") Stop
+          .input-group
+            button(type="submit" class="btn btn-default") Stop
         form(id='pause' method="get" action="pause")
-          button(type="submit" class="btn btn-default") Pause
+          .input-group
+            button(type="submit" class="btn btn-default") Pause
         form(id='patterns' class="form-horizontal" action="start" method="get")
           select(name="pattern")
             option(selected=(data.pattern == null)) Select a pattern
