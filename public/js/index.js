@@ -1,4 +1,4 @@
-var throttle_color_change_ms = 150;
+var throttle_color_change_ms = 100;
 console.log("got data from server: " , data);
 
 function handle_error(msg){
@@ -26,8 +26,25 @@ var throttled_color_change = _.throttle(handle_color_change, throttle_color_chan
 
 $(function(){
   $('form#patterns select').on('change', function(){
-    console.log("submitting form");
-    $('form#patterns').submit();
+    var t = $(this);
+    //$('form#patterns').submit();
+    $.get('start?pattern=' + t.val()).fail(function(x){
+      console.log("failed: ", x);
+      handle_error(x.responseJSON.error);
+    }).done(function(x){
+      clear_error();
+    });
+  });
+  $('form').on('submit', function(){
+    var t = $(this);
+    console.log("Submitting ",t);
+    $.get(t.attr('action')).fail(function(x){
+      console.log("failed: ", x);
+      handle_error(x.responseJSON.error);
+    }).done(function(x){
+      clear_error();
+    });
+    return false;
   });
   $('input.colorslider').each(function(){
     var s = $(this);

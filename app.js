@@ -90,7 +90,8 @@ app.post('/update', function(req, res){
 app.use(function(err, req, res, next) {
   console.error("Error:",err);
   res.status(500);
-  res.send({ error: err.message });
+  var msg = err.message || err;
+  res.send({ error: msg });
 });
 
 var server = app.listen(port, function () {
