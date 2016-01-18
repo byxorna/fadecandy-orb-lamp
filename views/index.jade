@@ -25,6 +25,9 @@ html
         form(id='pause' method="get" action="pause")
           .input-group
             button(type="submit" class="btn btn-default") Pause
+        form(id='unpause' method="get" action="unpause")
+          .input-group
+            button(type="submit" class="btn btn-default") Unpause
         form(id='patterns' class="form-horizontal" action="start" method="get")
           select(name="pattern")
             option(selected=(data.pattern == null)) Select a pattern

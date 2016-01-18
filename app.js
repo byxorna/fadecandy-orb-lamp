@@ -69,6 +69,12 @@ app.get('/pause', function (req, res) {
   res.send({message:"Paused", data: orb.data() });
 });
 
+app.get('/unpause', function (req, res) {
+  console.log("Unpausing");
+  orb.unpause();
+  res.send({message:"Unpaused", data: orb.data() });
+});
+
 app.get('/stop', function (req, res) {
   console.log("Stopping lightshow");
   orb.stop();
