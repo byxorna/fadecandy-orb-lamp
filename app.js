@@ -6,14 +6,6 @@ var layoutFile  = process.env['LAYOUT'] || process.argv[2] || './layout_16x8z.js
 
 // draw functions like {'waves': function(opc,model,client,data)}
 var patterns = {};
-// global state of the orb.
-// any parameters you want passed into draw functions should be in
-// here, set by any client.
-var data = {
-  r: 100,
-  g: 75,
-  b: 200,
-};
 
 var OPC = new require('./opc');
 var express = require('express');
@@ -48,10 +40,11 @@ app.use( bodyParser.json() );
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function(req, res){
+  //console.log(orb.data());
   res.render('index', {
     title: 'Fadecandy Orb',
     patterns: Object.keys(patterns),
-    data: data,
+    data: orb.data(),
   });
 });
 
@@ -60,38 +53,44 @@ app.post('/', function(req, res){
   res.redirect('/');
 });
 
-app.get('/start/:pattern', function (req, res) {
-  var pattern = req.params.pattern;
-  //TODO(gabe): parse any data from request, pass to draw fn
-  console.log("Starting show! Have a good trip!", data);
+app.get('/start', function (req, res) {
+  var pattern = req.query.pattern;
   if (!patterns[pattern]) {
     throw "No pattern found named " + pattern;
   }
-  orb.run( patterns[pattern], data);
-  res.send({message: "Running " + pattern });
+  console.log("Running pattern " + pattern);
+  orb.run(pattern, patterns[pattern] );
+  res.send({message: "Running " + pattern, data: orb.data() });
 });
 
 app.get('/pause', function (req, res) {
   console.log("Pausing");
   orb.pause();
-  res.send({message:"Paused"});
+  res.send({message:"Paused", data: orb.data() });
 });
 
 app.get('/stop', function (req, res) {
   console.log("Stopping lightshow");
   orb.stop();
-  res.send({message:"Stopped"});
+  res.send({message:"Stopped", data: orb.data() });
 });
 
-app.post('/settings', function(req, res){
-  console.log("Got updated settings: ", req.body.data);
+app.post('/update', function(req, res){
+  console.log("Got updated settings: ", req.body);
+  var d = req.body;
+  // cull values to ints
+  d.color.r = d.color.r | 0;
+  d.color.g = d.color.g | 0;
+  d.color.b = d.color.b | 0;
+  orb.update(d);
+  res.send({ message:"Settings updated", data: orb.data() });
 });
 
 // handle errors last
 app.use(function(err, req, res, next) {
   console.error("Error:",err);
   res.status(500);
-  res.send({ error: err });
+  res.send({ error: err.message });
 });
 
 var server = app.listen(port, function () {
