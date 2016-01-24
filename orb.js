@@ -5,7 +5,7 @@ var activeFunctionName = null;
 var data = {
   red: 255,
   blue: 255,
-  green: 255,
+  green: 0,
   period: 10000,
   pattern: null,
 };
