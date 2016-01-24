@@ -4,9 +4,6 @@ var OPC = require('../opc');
 **/
 
 module.exports = function draw(model, client, data) {
-    var r = (data.color.r == null) ? 255 : data.color.r,
-        g = (data.color.g == null) ? 255 : data.color.g,
-        b = (data.color.b == null) ? 255 : data.color.b;
-    var c = [r,g,b];
+    var c = [data.red,data.green,data.blue];
     client.mapPixels(function(_){ return c; }, model);
 };

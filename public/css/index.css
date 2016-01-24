@@ -1,9 +1,12 @@
-#r_slider > .slider-track > .slider-handle {
+#red_slider > .slider-track > .slider-handle {
   background: #e51c23;
 }
-#b_slider > .slider-track > .slider-handle {
+#blue_slider > .slider-track > .slider-handle {
   background: #0d87e9;
 }
-#g_slider > .slider-track > .slider-handle {
+#green_slider > .slider-track > .slider-handle {
   background: #4caf50;
+}
+#period_slider > .slider-track > .slider-handle {
+  background: #b3b3b3;
 }

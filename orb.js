@@ -1,12 +1,12 @@
 var interval = null;
 var activeFunction = null;
 var activeFunctionName = null;
+// user controllable data
 var data = {
-  color: {
-    r: 255,
-    g: 255,
-    b: 255,
-  },
+  red: 255,
+  blue: 255,
+  green: 255,
+  period: 10000,
   pattern: null,
 };
 
@@ -14,8 +14,11 @@ module.exports = function(model,client){
   return {
     update: function(d){
       // only allow updating the color field for now
-      data.color = d.color;
-      //data = d;
+      //TODO(gabe) do input validation here?
+      data.red = d.red;
+      data.blue = d.blue;
+      data.green = d.green;
+      data.period = d.period;
     },
     data: function(){
       return data;

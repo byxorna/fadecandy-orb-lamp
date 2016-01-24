@@ -85,9 +85,10 @@ app.post('/update', function(req, res){
   console.log("Got updated settings: ", req.body);
   var d = req.body;
   // cull values to ints
-  d.color.r = d.color.r | 0;
-  d.color.g = d.color.g | 0;
-  d.color.b = d.color.b | 0;
+  d.red = d.red | 0;
+  d.green = d.green | 0;
+  d.blue = d.blue | 0;
+  d.period = d.period | 0;
   orb.update(d);
   res.send({ message:"Settings updated", data: orb.data() });
 });
