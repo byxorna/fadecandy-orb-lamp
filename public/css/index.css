@@ -1,12 +1,3 @@
-#red_slider > .slider-track > .slider-handle {
-  background: #e51c23;
-}
-#blue_slider > .slider-track > .slider-handle {
-  background: #0d87e9;
-}
-#green_slider > .slider-track > .slider-handle {
-  background: #4caf50;
-}
-#period_slider > .slider-track > .slider-handle {
-  background: #b3b3b3;
+input[type=range] {
+  width:100%;
 }

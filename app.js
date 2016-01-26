@@ -16,6 +16,7 @@ var app = express();
 console.log("Loading layout " + layoutFile);
 var model = OPC.loadModel(layoutFile);
 var client = new OPC(opcHost, opcPort);
+var chromath = require('chromath');
 var orb = require('./orb')(model, client);
 
 // load all the patterns available
@@ -40,11 +41,15 @@ app.use( bodyParser.json() );
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function(req, res){
-  //console.log(orb.data());
+  var d = orb.data();
   res.render('index', {
     title: 'Fadecandy Orb',
     patterns: Object.keys(patterns),
-    data: orb.data(),
+    data: {
+      pattern: d.pattern,
+      color_hex: '#'+chromath.rgb2hex(d.red,d.green,d.blue).join(''),
+      period: d.period,
+    }
   });
 });
 
@@ -84,12 +89,16 @@ app.get('/stop', function (req, res) {
 app.post('/update', function(req, res){
   console.log("Got updated settings: ", req.body);
   var d = req.body;
-  // cull values to ints
-  d.red = d.red | 0;
-  d.green = d.green | 0;
-  d.blue = d.blue | 0;
-  d.period = d.period | 0;
-  orb.update(d);
+  // only allow color_hex and period from client
+  var c = new chromath(d.color_hex).toRGBArray();
+  console.log("got color c ",c);
+  var cleandata = {
+    red: c[0],
+    green: c[1],
+    blue: c[2],
+    period: d.period|0,
+  };
+  orb.update(cleandata);
   res.send({ message:"Settings updated", data: orb.data() });
 });
 

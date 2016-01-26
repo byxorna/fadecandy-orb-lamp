@@ -11,9 +11,9 @@ function clear_error(){
 function handle_data_change(evt){
   var slider = $(evt.currentTarget);
   var channel = slider.attr('name');
-  console.log("Got data change", channel, evt.value.newValue);
-  data[channel] = evt.value.newValue;
-  console.log("got value",evt.value.newValue);
+  var v = slider.val();
+  console.log("Got data change", channel, v);
+  data[channel] = v;
   $.post('update', data).fail(function(x){
     console.log("failed: ", x);
     handle_error(x.responseJSON.error);
@@ -46,13 +46,5 @@ $(function(){
     });
     return false;
   });
-  $('input.dataslider').each(function(){
-    var s = $(this);
-    var sl = s.slider({
-      id: s.attr('name') + "_slider",
-      reversed: true,
-      tooltip: 'hide',
-    });
-    sl.on('change', throttled_data_change);
-  });
+  $('form input').on('change', throttled_data_change);
 });
