@@ -1,3 +1,24 @@
 input[type=range] {
+  /*
   width:100%;
+  padding:15px 0 15px 0;
+  */
+}
+input[type=color] {
+  /*
+  width:100%;
+  */
+  height:75px;
+}
+
+button[type=submit] {
+  /*
+  width:100%;
+  */
+}
+
+form select {
+  /*
+  width: 100%;
+  */
 }

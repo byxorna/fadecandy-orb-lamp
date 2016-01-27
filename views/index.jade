@@ -3,35 +3,59 @@ html
     script(src="/js/jquery-2.2.0.min.js")
     script(src="/js/underscore-1.8.3-min.js")
     link(rel='stylesheet', href="/css/bootstrap.min.css")
-    link(rel='stylesheet' href="/css/bootstrap-theme.min.css")
+    link(rel='stylesheet' href="/css/bootstrap-cyborg.css")
     script(src="/js/bootstrap.min.js")
     title!= title
     link(rel='stylesheet', href='/css/index.css')
   body
     div.content-area
       block content
-        div.message.alert(role="alert" style="display:none;")
-
+        nav.navbar.navbar-default
+          .container-fluid
+            .navbar-header
+              a.navbar-brand(href="#") Orb Lamp
         div.container
-          form.form-inline(id='settings' method="post" action="update")
-            input.color(name="color_hex", type="color",value=data.color_hex)
-            input.period(type="range",name="period",min=100,max=12000,step=100,value=data.period)
-          form(id='stop' method="get" action="stop")
-            .input-group
-              button(type="submit" class="btn btn-default") Stop
-          form(id='pause' method="get" action="pause")
-            .input-group
-              button(type="submit" class="btn btn-default") Pause
-          form(id='unpause' method="get" action="unpause")
-            .input-group
-              button(type="submit" class="btn btn-default") Unpause
-          form(id='patterns' class="form-horizontal" action="start" method="get")
-            select(name="pattern")
-              option(selected=(data.pattern == null)) Select a pattern
-              each pattern in patterns
-                - var selected = (data.pattern == pattern);
-                option(value=pattern, selected=selected)
-                  =pattern
+          .row
+            .col-md-9
+
+              .row
+                div.message.alert(role="alert" style="display:none;")
+
+              .row
+                .col-sm-3
+                .col-sm-6
+                  form(id='patterns' action="start" method="get")
+                    select.form-control(name="pattern")
+                      option(selected=(data.pattern == null)) Select a pattern
+                      each pattern in patterns
+                        - var selected = (data.pattern == pattern);
+                        option(value=pattern, selected=selected)
+                          =pattern
+                .col-sm-3
+
+              form(id='settings' method="post" action="update")
+                .row
+                  .col-sm-3
+                  .col-sm-6
+                    input.color.form-control(name="color_hex", type="color",value=data.color_hex)
+                  .col-sm-3
+                .row
+                  .col-sm-3
+                  .col-sm-6
+                    input.period.form-control(type="range",name="period",min=100,max=12000,step=100,value=data.period)
+                  .col-sm-3
+              .row
+                .col-sm-3
+                .col-sm-2
+                  form(id='pause' method="get" action="pause")
+                    button.form-control.btn.btn-default(type="submit") Pause
+                .col-sm-2
+                  form(id='unpause' method="get" action="unpause")
+                    button.form-control.btn.btn-default(type="submit") Unpause
+                .col-sm-2
+                  form(id='stop' method="get" action="stop")
+                    button.form-control.btn.btn-danger(type="submit") Stop
+                .col-sm-3
 
     footer
       block footer
