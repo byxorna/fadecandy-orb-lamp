@@ -9,6 +9,7 @@
     "express": "^4.13.3",
     "jade": "^1.11.0",
     "morgan": "^1.6.1",
+    "perlin-noise": "0.0.1",
     "simplex-noise": "~2.2.0",
     "underscore": "^1.8.3"
   },
