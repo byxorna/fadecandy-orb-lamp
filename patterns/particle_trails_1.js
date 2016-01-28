@@ -32,9 +32,3 @@ module.exports = function draw(model, client, data) {
     client.mapParticles(particles, model);
 };
 
-function scalePoints(x,y){
-  return {
-    x: x,
-    y: y,
-  };
-}
