@@ -22,8 +22,8 @@ html
                 div.message.alert(role="alert" style="display:none;")
 
               .row
-                .col-sm-3
-                .col-sm-6
+                .col-md-3
+                .col-md-6
                   form(id='patterns' action="start" method="get")
                     select.form-control(name="pattern")
                       option(selected=(data.pattern == null)) Select a pattern
@@ -31,31 +31,31 @@ html
                         - var selected = (data.pattern == pattern);
                         option(value=pattern, selected=selected)
                           =pattern
-                .col-sm-3
+                .col-md-3
 
               form(id='settings' method="post" action="update")
                 .row
-                  .col-sm-3
-                  .col-sm-6
+                  .col-md-3
+                  .col-md-6
                     input.color.form-control(name="color_hex", type="color",value=data.color_hex)
-                  .col-sm-3
+                  .col-md-3
                 .row
-                  .col-sm-3
-                  .col-sm-6
+                  .col-md-3
+                  .col-md-6
                     input.period.form-control(type="range",name="period",min=100,max=12000,step=100,value=data.period)
-                  .col-sm-3
+                  .col-md-3
               .row
-                .col-sm-3
-                .col-sm-2
+                .col-md-3
+                .col-md-2
                   form(id='pause' method="get" action="pause")
                     button.form-control.btn.btn-default(type="submit") Pause
-                .col-sm-2
+                .col-md-2
                   form(id='unpause' method="get" action="unpause")
                     button.form-control.btn.btn-default(type="submit") Unpause
-                .col-sm-2
+                .col-md-2
                   form(id='stop' method="get" action="stop")
                     button.form-control.btn.btn-danger(type="submit") Stop
-                .col-sm-3
+                .col-md-3
 
     footer
       block footer
