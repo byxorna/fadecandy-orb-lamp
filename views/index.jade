@@ -3,7 +3,7 @@ html
     script(src="/js/jquery-2.2.0.min.js")
     script(src="/js/underscore-1.8.3-min.js")
     link(rel='stylesheet', href="/css/bootstrap.min.css")
-    link(rel='stylesheet' href="/css/bootstrap-cyborg.css")
+    link(rel='stylesheet' href="/css/bootstrap-cosmo.min.css")
     script(src="/js/bootstrap.min.js")
     title!= title
     link(rel='stylesheet', href='/css/index.css')
@@ -25,36 +25,47 @@ html
                 .col-md-3
                 .col-md-6
                   form(id='patterns' action="start" method="get")
-                    select.form-control(name="pattern")
-                      option(selected=(data.pattern == null)) Select a pattern
-                      each pattern in patterns
-                        - var selected = (data.pattern == pattern);
-                        option(value=pattern, selected=selected)
-                          =pattern
+                    .form-group
+                      label(for="pattern") Pattern
+                      select.form-control(id="pattern" name="pattern" multiple)
+                        #option(selected=(data.pattern == null)) Select a pattern
+                        each pattern in patterns
+                          - var selected = (data.pattern == pattern);
+                          option(value=pattern, selected=selected)
+                            =pattern
                 .col-md-3
 
               form(id='settings' method="post" action="update")
                 .row
                   .col-md-3
                   .col-md-6
-                    input.color.form-control(name="color_hex", type="color",value=data.color_hex)
+                    .form-group
+                      label(for="colorinput") Base Color
+                      input.color.form-control(id="colorinput" name="color_hex", type="color",value=data.color_hex)
                   .col-md-3
                 .row
                   .col-md-3
                   .col-md-6
-                    input.period.form-control(type="range",name="period",min=100,max=12000,step=100,value=data.period)
+                    .form-group
+                      label(for="period") Animation Period
+                      input.period.form-control(id="period" type="range",name="period",min=100,max=12000,step=100,value=data.period)
                   .col-md-3
               .row
                 .col-md-3
                 .col-md-2
                   form(id='pause' method="get" action="pause")
-                    button.form-control.btn.btn-default(type="submit") Pause
+                    button.form-control.btn.btn-primary(type="submit") Pause
                 .col-md-2
                   form(id='unpause' method="get" action="unpause")
-                    button.form-control.btn.btn-default(type="submit") Unpause
+                    button.form-control.btn.btn-primary(type="submit") Unpause
                 .col-md-2
                   form(id='stop' method="get" action="stop")
                     button.form-control.btn.btn-danger(type="submit") Stop
+                .col-md-3
+              .row
+                .col-md-3
+                .col-md-6
+                  p.text-muted Built with Node.JS, Fadecandy, and duct tape.
                 .col-md-3
 
     footer
