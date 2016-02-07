@@ -27,8 +27,8 @@ html
                   form(id='patterns' action="start" method="get")
                     .form-group
                       label(for="pattern") Pattern
-                      select.form-control(id="pattern" name="pattern" multiple)
-                        #option(selected=(data.pattern == null)) Select a pattern
+                      select.form-control(id="pattern" name="pattern")
+                        option(selected=(data.pattern == null)) Select a pattern
                         each pattern in patterns
                           - var selected = (data.pattern == pattern);
                           option(value=pattern, selected=selected)
