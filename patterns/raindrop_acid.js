@@ -1,7 +1,6 @@
 var OPC = require('../opc');
 var chromath = require('chromath');
 var numDrops = 50;
-var intensityDecay = 0.02;
 var falloff = 100; // idk what this does
 var particles = [];
 
@@ -21,7 +20,7 @@ module.exports = function draw(model, client, data) {
           color: c
         };
       } else {
-        particles[i].intensity -= intensityDecay*(data.period/20000);
+        particles[i].intensity -= (20/data.period);
       }
     }
     client.mapParticles(particles, model);
