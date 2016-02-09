@@ -1,0 +1,14 @@
+[Unit]
+Description=Orb HTTP Service
+After=network.target
+ 
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/fadecandy-orb-lamp
+ExecStartPre=npm install
+ExecStart=npm start
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
