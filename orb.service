@@ -5,8 +5,8 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=/home/pi/fadecandy-orb-lamp
-ExecStartPre=npm install
-ExecStart=npm start
+ExecStartPre=/usr/bin/npm install
+ExecStart=/usr/bin/npm start
 Restart=on-failure
 
 [Install]
