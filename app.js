@@ -12,6 +12,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var app = express();
+var childprocess = require('child_process');
 
 console.log("Loading layout " + layoutFile);
 var model = OPC.loadModel(layoutFile);
@@ -52,6 +53,29 @@ app.get('/', function(req, res){
     }
   });
 });
+
+app.get('/shutdown', function(req, res){
+  console.log("Attempting shutdown");
+  childprocess.exec('shutdown -h now', function(e, stderr, stdout){
+    if (e){
+      console.log("Shutdown got error: " + e);
+    }
+    console.log("Stderr: " + stderr + "Stdout: " + stdout);
+  });
+  res.redirect('/');
+});
+
+app.get('/restart', function(req, res){
+  console.log("Attempting restart");
+  childprocess.exec('shutdown -r now', function(e, stderr, stdout){
+    if (e){
+      console.log("Reboot got error: " + e);
+    }
+    console.log("Stderr: " + stderr + "Stdout: " + stdout);
+  });
+  res.redirect('/');
+});
+
 
 app.post('/', function(req, res){
   console.log("Got post of ", req.body);
