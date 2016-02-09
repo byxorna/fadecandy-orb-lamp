@@ -4,6 +4,8 @@ After=network.target
  
 [Service]
 Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
 WorkingDirectory=/home/pi/fadecandy-orb-lamp
 ExecStartPre=/usr/bin/npm install
 ExecStart=/usr/bin/npm start
