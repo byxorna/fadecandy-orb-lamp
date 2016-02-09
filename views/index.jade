@@ -16,57 +16,44 @@ html
               a.navbar-brand(href="#") Orb Lamp
         div.container
           .row
-            .col-md-9
+            div.message.alert(role="alert" style="display:none;")
 
-              .row
-                div.message.alert(role="alert" style="display:none;")
+          .row
+            .col-lg-6.col-lg-offset-3
+              form(id='patterns' action="start" method="get")
+                .form-group
+                  label(for="pattern") Pattern
+                  select.form-control(id="pattern" name="pattern")
+                    option(selected=(data.pattern == null)) Select a pattern
+                    each pattern in patterns
+                      - var selected = (data.pattern == pattern);
+                      option(value=pattern, selected=selected)
+                        =pattern
 
-              .row
-                .col-md-3
-                .col-md-6
-                  form(id='patterns' action="start" method="get")
-                    .form-group
-                      label(for="pattern") Pattern
-                      select.form-control(id="pattern" name="pattern")
-                        option(selected=(data.pattern == null)) Select a pattern
-                        each pattern in patterns
-                          - var selected = (data.pattern == pattern);
-                          option(value=pattern, selected=selected)
-                            =pattern
-                .col-md-3
-
-              form(id='settings' method="post" action="update")
-                .row
-                  .col-md-3
-                  .col-md-6
-                    .form-group
-                      label(for="colorinput") Base Color
-                      input.color.form-control(id="colorinput" name="color_hex", type="color",value=data.color_hex)
-                  .col-md-3
-                .row
-                  .col-md-3
-                  .col-md-6
-                    .form-group
-                      label(for="period") Animation Period
-                      input.period.form-control(id="period" type="range",name="period",min=100,max=12000,step=100,value=data.period)
-                  .col-md-3
-              .row
-                .col-md-3
-                .col-md-2
-                  form(id='pause' method="get" action="pause")
-                    button.form-control.btn.btn-primary(type="submit") Pause
-                .col-md-2
-                  form(id='unpause' method="get" action="unpause")
-                    button.form-control.btn.btn-primary(type="submit") Unpause
-                .col-md-2
-                  form(id='stop' method="get" action="stop")
-                    button.form-control.btn.btn-danger(type="submit") Stop
-                .col-md-3
-              .row
-                .col-md-3
-                .col-md-6
-                  p.text-muted Built with Node.JS, Fadecandy, and duct tape.
-                .col-md-3
+          form(id='settings' method="post" action="update")
+            .row
+              .col-lg-6.col-lg-offset-3
+                .form-group
+                  label(for="colorinput") Base Color
+                  input.color.form-control(id="colorinput" name="color_hex", type="color",value=data.color_hex)
+            .row
+              .col-lg-6.col-lg-offset-3
+                .form-group
+                  label(for="period") Animation Period
+                  input.period.form-control(id="period" type="range",name="period",min=100,max=12000,step=100,value=data.period)
+          .row
+            .col-md-4
+              form(id='pause' method="get" action="pause")
+                button.form-control.btn.btn-primary(type="submit") Pause
+            .col-md-4
+              form(id='unpause' method="get" action="unpause")
+                button.form-control.btn.btn-primary(type="submit") Unpause
+            .col-md-4
+              form(id='stop' method="get" action="stop")
+                button.form-control.btn.btn-danger(type="submit") Stop
+          .row
+            .col-lg-6.col-lg-offset-3
+              p.text-muted Built with Node.JS, Fadecandy, and duct tape.
 
     footer
       block footer
