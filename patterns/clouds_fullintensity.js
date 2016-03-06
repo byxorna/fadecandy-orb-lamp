@@ -16,13 +16,13 @@ module.exports = function draw(model, client, data) {
     dy += Math.sin(angle) * (80/data.period);
 
     client.mapPixels(function(px){
-			var x = px.point[0];
+      var x = px.point[0];
       var y = px.point[2];
       var n = Perlin.noise(dx + x, dy + y*2, now);
-			//var m = Perlin.noise(dx + x, dy + y*2, now);
-			var h = (hue + 360.0 * n) % 360.0;
+      //var m = Perlin.noise(dx + x, dy + y*2, now);
+      var h = (hue + 360.0 * n) % 360.0;
       var s = 1.0-0.5*n;
-			var v = 1.0;
+      var v = 1.0;
       return chromath.hsv(h, s, v).toRGBArray();
     }, model);
 };
