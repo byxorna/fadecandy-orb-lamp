@@ -1,5 +1,8 @@
 html
   head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
     script(src="/js/jquery-2.2.0.min.js")
     script(src="/js/underscore-1.8.3-min.js")
     link(rel='stylesheet', href="/css/bootstrap.min.css")
@@ -53,13 +56,13 @@ html
                   label(for="period") Animation Period
                   input.period.form-control(id="period" type="range",name="period",min=100,max=12000,step=100,value=data.period)
           .row
-            .col-md-4
+            .col-lg-6.col-lg-offset-3
               form(id='pause' method="get" action="pause")
                 button.form-control.btn.btn-primary(type="submit") Pause
-            .col-md-4
+            .col-lg-6.col-lg-offset-3
               form(id='unpause' method="get" action="unpause")
                 button.form-control.btn.btn-primary(type="submit") Unpause
-            .col-md-4
+            .col-lg-6.col-lg-offset-3
               form(id='stop' method="get" action="stop")
                 button.form-control.btn.btn-danger(type="submit") Stop
           .row
