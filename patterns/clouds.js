@@ -27,7 +27,7 @@ module.exports = function draw(model, client, data) {
       var h = (hue + 360.0 * n) % 360.0;
       //var s = .75-m;
       var s = 1.0-0.5*n;
-      var v = .5+m*m;
+      var v = (.5+m*m)*data.intensity;
       return chromath.hsv(h, s, v).toRGBArray();
     }, model);
 };

@@ -22,7 +22,7 @@ module.exports = function draw(model, client, data) {
       //var m = Perlin.noise(dx + x, dy + y*2, now);
       var h = (hue + 360.0 * n) % 360.0;
       var s = 1.0-0.5*n;
-      var v = 1.0;
+      var v = data.intensity;
       return chromath.hsv(h, s, v).toRGBArray();
     }, model);
 };
