@@ -7,6 +7,7 @@ var data = {
   blue: 255,
   green: 0,
   period: 10000,
+  saturation: 1.0,
   pattern: null,
 };
 
@@ -14,11 +15,11 @@ module.exports = function(model,client){
   return {
     update: function(d){
       // only allow updating the color field for now
-      //TODO(gabe) do input validation here?
-      data.red = d.red;
-      data.blue = d.blue;
-      data.green = d.green;
+      data.red = Math.min(Math.max(d.red,0),255);
+      data.blue = Math.min(Math.max(d.blue,0),255);
+      data.green = Math.min(Math.max(d.green,0),255);
       data.period = d.period;
+      data.saturation = Math.min(Math.max(d.saturation,0.0),1.0);
     },
     data: function(){
       return data;

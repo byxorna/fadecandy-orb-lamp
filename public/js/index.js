@@ -27,7 +27,6 @@ var throttled_data_change = _.throttle(handle_data_change, throttle_data_change_
 $(function(){
   $('form#patterns select').on('change', function(){
     var t = $(this);
-    //$('form#patterns').submit();
     $.get('start?pattern=' + t.val()).fail(function(x){
       console.log("failed: ", x);
       handle_error(x.responseJSON.error);

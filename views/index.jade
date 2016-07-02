@@ -55,6 +55,11 @@ html
                 .form-group
                   label(for="period") Animation Period
                   input.period.form-control(id="period" type="range",name="period",min=100,max=12000,step=100,value=data.period)
+            .row
+              .col-lg-6.col-lg-offset-3
+                .form-group
+                  label(for="saturation") Saturation
+                  input.period.form-control(id="saturation" type="range",name="saturation",min=0.0,max=1.0,step=0.01,value=data.saturation)
           .row
             .col-lg-6.col-lg-offset-3
               form(id='pause' method="get" action="pause")

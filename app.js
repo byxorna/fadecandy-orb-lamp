@@ -43,14 +43,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function(req, res){
   var d = orb.data();
+  // this is useful for the webui but not provided in the orbs internal
+  // representation.
+  d.color_hex = '#'+chromath.rgb2hex(d.red,d.green,d.blue).join('');
   res.render('index', {
     title: 'Fadecandy Orb',
     patterns: Object.keys(patterns),
-    data: {
-      pattern: d.pattern,
-      color_hex: '#'+chromath.rgb2hex(d.red,d.green,d.blue).join(''),
-      period: d.period,
-    }
+    data: d,
   });
 });
 
@@ -121,6 +120,7 @@ app.post('/update', function(req, res){
     green: c[1],
     blue: c[2],
     period: d.period|0,
+    saturation: d.saturation*1.0,
   };
   orb.update(cleandata);
   res.send({ message:"Settings updated", data: orb.data() });
