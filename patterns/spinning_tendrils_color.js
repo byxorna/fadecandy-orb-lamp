@@ -13,7 +13,7 @@ module.exports = function draw(model, client, data) {
         var theta = (0.001*Date.now()) + 0.06 * i;
         var x = 1.0 - theta%2.0;  // constant speed
         var y = 0.5-i/numParticles;
-        var c = chromath.hsv((time)%360,1,1).toRGBArray();
+        var c = chromath.hsv((time)%360,1,data.intensity).toRGBArray();
         particles[i] = {
             point: [x, 0, y],
             intensity: 0.2 * s,

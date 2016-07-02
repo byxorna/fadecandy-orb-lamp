@@ -7,7 +7,7 @@ var particles = [];
 module.exports = function draw(model, client, data) {
     var p = data.period/8;
     var dt = (Date.now()%p)/p;
-    var c = chromath.hsv(360*dt,1,1).toRGBArray();
+    var c = chromath.hsv(360*dt,1,data.intensity).toRGBArray();
     for (var i = 0; i < numDrops; i++){
       if (particles[i] == null || particles[i].intensity < 0.1 || particles[i].falloff < 1){
         // generate a new particle

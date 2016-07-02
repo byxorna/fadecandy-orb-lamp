@@ -5,7 +5,8 @@ var chromath = require('chromath');
 **/
 
 module.exports = function draw(model, client, data) {
-    var c = chromath.rgb(data.red,data.green,data.blue)
+    var c = chromath
+      .rgb(data.red,data.green,data.blue)
       .darken(1.0-data.intensity)
       .toRGBArray();
     client.mapPixels(function(_){ return c; }, model);

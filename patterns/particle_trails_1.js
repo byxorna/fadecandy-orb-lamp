@@ -19,7 +19,7 @@ module.exports = function draw(model, client, data) {
         var x = Math.cos(theta);
         var y = 0.5* Math.sin(theta + 10.0 * Math.sin(theta * 0.15));
         //var hue = time * 0.01 + s * 0.2;
-        var c = chromath.hsv(dt*360,1,1).toRGBArray();
+        var c = chromath.hsv(dt*360,1,data.intensity).toRGBArray();
         particles[i] = {
             point: [x, 0, y],
             intensity: 0.2 * s,

@@ -12,7 +12,7 @@ module.exports = function draw(model, client, data) {
       var lowerwindow = dt-window_width/2-.5;
       var intensityu = Math.max(0, Math.min((y-lowerwindow)/window_width*2, 1.0));
       var intensityl = Math.max(0, Math.min((upperwindow-y)/window_width*2, 1.0));
-      var c = chromath.hsv(360*slowdt,1,Math.min(intensityu,intensityl));
+      var c = chromath.hsv(360*slowdt,1,Math.min(intensityu,intensityl)*data.intensity);
       return c.toRGBArray();
     }, model);
 };

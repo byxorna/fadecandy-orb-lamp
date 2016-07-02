@@ -10,6 +10,7 @@ module.exports = function draw(model, client, data) {
     client.mapPixels(function(led){
       var x = led.point[0];
       var wrapx = (x+1.0+dp*2.0)%2.0 - 1.0;
-      return chromath.towards(c1, c2, Math.abs(wrapx)).toRGBArray();
+      return chromath.towards(c1, c2, Math.abs(wrapx))
+        .darken(1.0-data.intensity).toRGBArray();
     }, model);
 };

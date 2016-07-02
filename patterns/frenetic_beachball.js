@@ -10,7 +10,9 @@ function betweenwin(x,start,stop){
 }
 
 module.exports = function draw(model, client, data) {
-    var c1 = chromath.rgb( {r:data.red,g:data.green,b:data.blue});
+    var c1 = chromath
+      .rgb( {r:data.red,g:data.green,b:data.blue})
+      .darken(1.0-data.intensity);
     var c2 = chromath.complement(c1);
 
     var dt = Date.now()/data.period*10.0;
@@ -19,9 +21,9 @@ module.exports = function draw(model, client, data) {
       var p = (Math.sin(dt)+1.0)%2.0,
           q = (Math.sin(dt-Math.PI)+1.0)%2.0;
       if(betweenwin(x,p,q)){
-      return chromath.towards(c1, c2, Math.abs(x/(q-p))%1.0).toRGBArray();
+        return chromath.towards(c1, c2, Math.abs(x/(q-p))%1.0).toRGBArray();
       }else{
-      return chromath.towards(c1, c2, Math.abs(x/(p-q))%1.0).toRGBArray();
+        return chromath.towards(c1, c2, Math.abs(x/(p-q))%1.0).toRGBArray();
       }
     }, model);
 };

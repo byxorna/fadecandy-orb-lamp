@@ -15,7 +15,7 @@ function betweenwin(x,start,stop){
 module.exports = function draw(model, client, data) {
     var colormod = (Date.now() % (data.period*7))/(data.period*7);
     var spinmod = (Date.now() % data.period)/(data.period);
-    var c1 = chromath.hsv(360*colormod,1,1);
+    var c1 = chromath.hsv(360*colormod,1,data.intensity);
     var c2 = chromath.complement(c1);
     var c1a = c1.toRGBArray(),
         c2a = c2.toRGBArray();

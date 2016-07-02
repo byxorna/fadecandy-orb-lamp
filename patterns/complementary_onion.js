@@ -19,6 +19,7 @@ module.exports = function draw(model, client, data) {
     client.mapPixels(function(led){
       var x = led.point[0];
       var p = (Math.sin(Math.abs(x)+Date.now()/data.period*10.0)+1.0)/2.0;
-      return chromath.towards(c1, c2, p).toRGBArray();
+      return chromath.towards(c1, c2, p)
+        .darken(1.0-data.intensity).toRGBArray();
     }, model);
 };

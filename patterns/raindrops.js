@@ -5,7 +5,10 @@ var falloff = 100; // idk what this does
 var particles = [];
 
 module.exports = function draw(model, client, data) {
-    var c = chromath.rgb({r:data.red,g:data.green,b:data.blue}).toRGBArray();
+    var c = chromath
+      .rgb({r:data.red,g:data.green,b:data.blue})
+      .darken(1.0-data.intensity)
+      .toRGBArray();
     for (var i = 0; i < numDrops; i++){
       if (particles[i] == null || particles[i].intensity < 0.1 || particles[i].falloff < 1){
         // generate a new particle

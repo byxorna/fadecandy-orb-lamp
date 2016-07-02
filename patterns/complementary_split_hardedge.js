@@ -15,7 +15,7 @@ function betweenwin(x,start,stop){
 
 module.exports = function draw(model, client, data) {
     var c = {r:data.red,g:data.green,b:data.blue};
-    var c1 = chromath.rgb(c);
+    var c1 = chromath.rgb(c).darken(1.0-data.intensity);
     var c2 = chromath.complement(c);
     var c1a = c1.toRGBArray(),
         c2a = c2.toRGBArray();
