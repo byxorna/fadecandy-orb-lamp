@@ -7,7 +7,7 @@ var data = {
   blue: 255,
   green: 0,
   period: 10000,
-  saturation: 1.0,
+  intensity: 1.0,
   pattern: null,
 };
 
@@ -19,7 +19,7 @@ module.exports = function(model,client){
       data.blue = Math.min(Math.max(d.blue,0),255);
       data.green = Math.min(Math.max(d.green,0),255);
       data.period = d.period;
-      data.saturation = Math.min(Math.max(d.saturation,0.0),1.0);
+      data.intensity = Math.min(Math.max(d.intensity,0.0),1.0);
     },
     data: function(){
       return data;

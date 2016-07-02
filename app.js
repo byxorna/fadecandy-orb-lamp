@@ -120,7 +120,7 @@ app.post('/update', function(req, res){
     green: c[1],
     blue: c[2],
     period: d.period|0,
-    saturation: d.saturation*1.0,
+    intensity: d.intensity*1.0,
   };
   orb.update(cleandata);
   res.send({ message:"Settings updated", data: orb.data() });
