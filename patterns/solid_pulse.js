@@ -14,11 +14,11 @@ module.exports = function draw(model, client, data) {
     if (tperiod <= peak){
       // breath full, release
       var pct = tperiod/peak;
-      var cappedIntensity = (1.0-minIllumination)-pct*(1.0-minIllumination);
+      var cappedIntensity = data.intensity*((1.0-minIllumination)-pct*(1.0-minIllumination));
       c = chromath.shade(rgb,cappedIntensity).toRGBArray();
     } else {
       var pct = (tperiod-peak)/(1.0-peak);
-      var cappedIntensity = pct*(1.0-minIllumination);
+      var cappedIntensity = (pct*(1.0-minIllumination))*data.intensity;
       c = chromath.shade(rgb,cappedIntensity).toRGBArray();
     }
     client.mapPixels(function(_){ return c; }, model);
