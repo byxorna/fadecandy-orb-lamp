@@ -22,19 +22,11 @@ The orb is made of a few parts
 
 The RPi runs the fadecandy server, as well as the nodejs web UI and control component. Patterns are implemented as a simple node module that exports a `draw(model,client,data)` function. User supplied data can be passed into each draw function via `data`, client is the OCP client for drawing on the orb, and `model` is the layout model for how the pixels exist in space.
 
-## Demo Time!
+# Demo Time!
 
-[![Orb Lamp Video](http://img.youtube.com/vi/iKaMXoh2JyU/0.jpg)](http://www.youtube.com/watch?v=iKaMXoh2JyU)
+## GIFs and pics
 
-[![Orb Lamp Video](http://img.youtube.com/vi/lEtLCduEgj4/0.jpg)](http://www.youtube.com/watch?v=lEtLCduEgj4)
-
-[![Orb Lamp Video](http://img.youtube.com/vi/9Epn-c5ENxA/0.jpg)](http://www.youtube.com/watch?v=9Epn-c5ENxA)
-
-[![Orb Lamp Video](http://img.youtube.com/vi/KWW0QkA8xVI/0.jpg)](http://www.youtube.com/watch?v=KWW0QkA8xVI)
-
-[![Orb Lamp Video](http://img.youtube.com/vi/ZDA5kHAtc8I/0.jpg)](http://www.youtube.com/watch?v=ZDA5kHAtc8I)
-
-[![Orb Lamp Video](http://img.youtube.com/vi/154zMtVKbKg/0.jpg)](http://www.youtube.com/watch?v=154zMtVKbKg)
+For images of assembly, check out [all these binary blobs in git!](https://github.com/byxorna/fadecandy-orb-lamp/tree/master/images)
 
 The central orb with LEDs:
 
@@ -48,7 +40,21 @@ Example of the web UI included. It provides control over what pattern is running
 
 ![Web UI](https://raw.githubusercontent.com/byxorna/fadecandy-orb-lamp/master/images/Screenshot_20160703-102027.png)
 
-For images of assembly, check out [all these binary blobs in git!](https://github.com/byxorna/fadecandy-orb-lamp/master/images)
 
+## Videos
+
+Click each thumbnail to see the video!
+
+[![Orb Lamp Video](http://img.youtube.com/vi/iKaMXoh2JyU/0.jpg)](http://www.youtube.com/watch?v=iKaMXoh2JyU)
+
+[![Orb Lamp Video](http://img.youtube.com/vi/lEtLCduEgj4/0.jpg)](http://www.youtube.com/watch?v=lEtLCduEgj4)
+
+[![Orb Lamp Video](http://img.youtube.com/vi/9Epn-c5ENxA/0.jpg)](http://www.youtube.com/watch?v=9Epn-c5ENxA)
+
+[![Orb Lamp Video](http://img.youtube.com/vi/KWW0QkA8xVI/0.jpg)](http://www.youtube.com/watch?v=KWW0QkA8xVI)
+
+[![Orb Lamp Video](http://img.youtube.com/vi/ZDA5kHAtc8I/0.jpg)](http://www.youtube.com/watch?v=ZDA5kHAtc8I)
+
+[![Orb Lamp Video](http://img.youtube.com/vi/154zMtVKbKg/0.jpg)](http://www.youtube.com/watch?v=154zMtVKbKg)
 
 
