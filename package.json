@@ -11,7 +11,8 @@
     "morgan": "^1.6.1",
     "proc-noise": "0.0.1",
     "simplex-noise": "~2.2.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "yargs": "^4.7.1"
   },
   "private": true
 }

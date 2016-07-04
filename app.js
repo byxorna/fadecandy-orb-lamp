@@ -1,8 +1,31 @@
-var layoutFile  = process.env['LAYOUT'] || process.argv[2] || './layout_16x8z.json',
-    opcHost     = process.env['OPC_HOST'] || 'localhost',
-    opcPort     = process.env['OPC_PORT'] || 7890,
-    port        = process.env['PORT'] || 3000,
-    patternsDir = process.env['PATTERNS_DIRECTORY'] || './patterns';
+var argv = require('yargs')
+		.usage('Usage: $0 [options]')
+    .nargs('layout', 1)
+			.describe('layout', 'Layout JSON file describing how LEDs are positioned')
+			.default('layout','./layout_16x8z.json')
+    .nargs('opc-host', 1)
+			.describe('opc-host', 'OPC host to connect to')
+			.default('opc-host','localhost')
+    .nargs('opc-port', 1)
+			.describe('opc-port', 'OPC UDP port')
+			.default('opc-port',7890)
+    .nargs('port', 1)
+			.describe('port', 'HTTP port to serve web UI and API on')
+			.default('port',3000)
+    .nargs('patterns-directory', 1)
+			.describe('patterns-directory', 'Directory to find all the pattern modules')
+			.default('patterns-directory','./patterns')
+    .nargs('initial-pattern', 1)
+			.describe('initial-pattern', 'Start running a given pattern on startup (without .js suffix)')
+    .help('h')
+    .alias('h', 'help')
+    .argv;
+
+var layoutFile  = process.env['LAYOUT'] || argv.layout,
+    opcHost     = process.env['OPC_HOST'] || argv['opc-host'],
+    opcPort     = process.env['OPC_PORT'] || argv['opc-port'],
+    port        = process.env['PORT'] || argv.port,
+    patternsDir = process.env['PATTERNS_DIRECTORY'] || argv['patterns-directory'];
 
 // draw functions like {'waves': function(opc,model,client,data)}
 var patterns = {};
@@ -31,6 +54,11 @@ for (var i = 0; i<patternFiles.length; i++){
   } else {
     console.log("Ignoring shady file: " + fName);
   }
+}
+
+if (argv['initial-pattern']) {
+  console.log("Running initial pattern passed via CLI: " + argv['initial-pattern']);
+  orb.run(argv['initial-pattern'], patterns[argv['initial-pattern']] );
 }
 
 app.use(require('morgan')('combined'));

@@ -3,11 +3,40 @@ Stuff for a fadecandy+neopixel hack project
 
 # Config
 
+The following env vars override any provided CLI flags
+
 * LAYOUT - layout file (./layout_16x8z.json)
 * OPC_HOST - OPC server host (localhost)
 * OPC_PORT - OPC server UDP port (7890)
 * PORT - http listen port
 * PATTERNS_DIRECTORY - directory to pull in pattern functions (./patterns)
+
+# Run
+
+```
+$ npm install
+...
+$ npm start -- -h
+
+> fadecandy-orb-lamp@ start /home/gabe/code/fadecandy-orb-lamp
+> node app.js "-h"
+
+Usage: app.js [options]
+
+Options:
+  --layout              Layout JSON file describing how LEDs are positioned
+                                                [default: "./layout_16x8z.json"]
+  --opc-host            OPC host to connect to            [default: "localhost"]
+  --opc-port            OPC UDP port                             [default: 7890]
+  --port                HTTP port to serve web UI and API on     [default: 3000]
+  --patterns-directory  Directory to find all the pattern modules
+                                                         [default: "./patterns"]
+  --initial-pattern     Start running a given pattern on startup (without .js
+                        suffix)
+  -h, --help            Show help                                      [boolean]
+
+
+```
 
 # Deets!
 
