@@ -22,23 +22,33 @@ The orb is made of a few parts
 
 The RPi runs the fadecandy server, as well as the nodejs web UI and control component. Patterns are implemented as a simple node module that exports a `draw(model,client,data)` function. User supplied data can be passed into each draw function via `data`, client is the OCP client for drawing on the orb, and `model` is the layout model for how the pixels exist in space.
 
+## Demo Time!
+
+[![Orb Lamp Video](http://img.youtube.com/vi/iKaMXoh2JyU/0.jpg)](http://www.youtube.com/watch?v=iKaMXoh2JyU)
+
+[![Orb Lamp Video](http://img.youtube.com/vi/lEtLCduEgj4/0.jpg)](http://www.youtube.com/watch?v=lEtLCduEgj4)
+
+[![Orb Lamp Video](http://img.youtube.com/vi/9Epn-c5ENxA/0.jpg)](http://www.youtube.com/watch?v=9Epn-c5ENxA)
+
+[![Orb Lamp Video](http://img.youtube.com/vi/KWW0QkA8xVI/0.jpg)](http://www.youtube.com/watch?v=KWW0QkA8xVI)
+
+[![Orb Lamp Video](http://img.youtube.com/vi/ZDA5kHAtc8I/0.jpg)](http://www.youtube.com/watch?v=ZDA5kHAtc8I)
+
+[![Orb Lamp Video](http://img.youtube.com/vi/154zMtVKbKg/0.jpg)](http://www.youtube.com/watch?v=154zMtVKbKg)
+
 The central orb with LEDs:
+
 ![Orb being assembled](https://67.media.tumblr.com/41319c58181af70b657ea51ce22f9b04/tumblr_o1jj0wGjIN1suda6jo1_1280.gif)
 
 Quick gif of one of the patterns:
+
 ![Orb Gif](https://67.media.tumblr.com/bad5ecad38fd4f0ad5e198a64c960325/tumblr_o3cfvjADXQ1suda6jo1_r1_400.gif)
 
 Example of the web UI included. It provides control over what pattern is running, and can provide some user control over base colors used, animation period, intensity, and can shutdown or restart the lamp.
+
 ![Web UI](https://raw.githubusercontent.com/byxorna/fadecandy-orb-lamp/master/images/Screenshot_20160703-102027.png)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iKaMXoh2JyU" frameborder="0" allowfullscreen></iframe>
+For images of assembly, check out [all these binary blobs in git!](https://github.com/byxorna/fadecandy-orb-lamp/master/images)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lEtLCduEgj4" frameborder="0" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9Epn-c5ENxA" frameborder="0" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KWW0QkA8xVI" frameborder="0" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZDA5kHAtc8I" frameborder="0" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/154zMtVKbKg" frameborder="0" allowfullscreen></iframe>
