@@ -2,7 +2,7 @@ var OPC = require('../opc');
 var chromath = require('chromath');
 var window_width = 0.55;
 
-module.exports = function draw(model, client, data) {
+function draw(model, client, data) {
     //var dt = (Date.now()%data.period)/data.period;
     var dt = (Math.sin(Date.now()/data.period*8) + 1)/2; //0..2
     var slowdt = (Date.now()%(data.period*4))/(data.period*4);
@@ -15,4 +15,9 @@ module.exports = function draw(model, client, data) {
       var c = chromath.hsv(360*slowdt,1,Math.min(intensityu,intensityl)*data.intensity);
       return c.toRGBArray();
     }, model);
+};
+
+module.exports = {
+  features: {color: false},
+  draw: draw,
 };

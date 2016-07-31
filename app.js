@@ -33,6 +33,7 @@ var patterns = {};
 var OPC = new require('./opc');
 var express = require('express');
 var bodyParser = require('body-parser');
+var _ = require('underscore');
 var fs = require('fs');
 var app = express();
 var childprocess = require('child_process');
@@ -47,10 +48,27 @@ var orb = require('./orb')(model, client);
 var patternFiles = fs.readdirSync(patternsDir);
 for (var i = 0; i<patternFiles.length; i++){
   var fName = patternsDir + "/" + patternFiles[i];
+  var default_features = {
+    color: true,
+    intensity: true,
+    period: true
+  };
   if (patternFiles[i].match(/^\w+\.js$/)) {
     var name = patternFiles[i].replace(/\.[^/.]+$/, "");
     console.log("Loading pattern: " + fName + " as " + name);
     patterns[name] = require(fName);
+    if (typeof(patterns[name]) == 'function') {
+      // use default features
+      patterns[name] = {
+        features: default_features,
+        draw: patterns[name]
+      };
+    } else {
+      // merge in default features
+      patterns[name]['features'] = _.extend(default_features, patterns[name]['features']);
+    }
+    console.log("Loaded pattern:");
+    console.log(patterns[name]);
   } else {
     console.log("Ignoring shady file: " + fName);
   }
@@ -76,7 +94,7 @@ app.get('/', function(req, res){
   d.color_hex = '#'+chromath.rgb2hex(d.red,d.green,d.blue).join('');
   res.render('index', {
     title: 'Fadecandy Orb',
-    patterns: Object.keys(patterns),
+    patterns: patterns,
     data: d,
   });
 });
@@ -115,7 +133,7 @@ app.get('/start', function (req, res) {
     throw "No pattern found named " + pattern;
   }
   console.log("Running pattern " + pattern);
-  orb.run(pattern, patterns[pattern] );
+  orb.run(pattern, patterns[pattern]['draw'] );
   res.send({message: "Running " + pattern, data: orb.data() });
 });
 

@@ -87,3 +87,7 @@ Click each thumbnail to see the video!
 [![Orb Lamp Video](http://img.youtube.com/vi/154zMtVKbKg/0.jpg)](http://www.youtube.com/watch?v=154zMtVKbKg)
 
 
+#TODO
+
+* vendorize any external sources for css/js
+* disable inputs by pattern

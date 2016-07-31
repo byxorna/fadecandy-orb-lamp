@@ -39,17 +39,21 @@ html
                   label(for="pattern") Pattern
                   select.form-control(id="pattern" name="pattern")
                     option(selected=(data.pattern == null)) Select a pattern
-                    each pattern in patterns
-                      - var selected = (data.pattern == pattern);
-                      option(value=pattern, selected=selected)
-                        =pattern
+                    each val, name in patterns
+                      - var selected = (data.pattern == name);
+                      option(value=name, selected=selected)
+                        =name
 
           form(id='settings' method="post" action="update")
             .row
               .col-lg-6.col-lg-offset-3
                 .form-group
                   label(for="colorinput") Base Color
-                  input.color.form-control(id="colorinput" name="color_hex", type="color",value=data.color_hex)
+                  - var enabled = data.pattern != null && patterns[data.pattern]['features']['color'];
+                  if enabled
+                    input.color.form-control(id="colorinput" name="color_hex", type="color",value=data.color_hex)
+                  else
+                    input.color.form-control(id="colorinput" name="color_hex", type="color",value=data.color_hex,disabled)
             .row
               .col-lg-6.col-lg-offset-3
                 .form-group
@@ -78,4 +82,5 @@ html
       block footer
   script.
     var data = !{JSON.stringify(data)};
+    var patterns = !{JSON.stringify(patterns)};
   script(src="/js/index.js")

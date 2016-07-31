@@ -3,7 +3,7 @@
 var OPC = require('../opc');
 var chromath = require('chromath');
 
-module.exports = function draw(model, client, data) {
+function draw(model, client, data) {
 
     var dt = (Date.now()%data.period)/data.period;
     var time = 0.001 * new Date().getTime();
@@ -32,3 +32,7 @@ module.exports = function draw(model, client, data) {
     client.mapParticles(particles, model);
 };
 
+module.exports = {
+  features: {color: false},
+  draw: draw,
+};

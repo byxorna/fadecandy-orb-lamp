@@ -12,7 +12,7 @@ function betweenwin(x,start,stop){
   }
 }
 
-module.exports = function draw(model, client, data) {
+function draw(model, client, data) {
     var colormod = (Date.now() % (data.period*7))/(data.period*7);
     var spinmod = (Date.now() % data.period)/(data.period);
     var c1 = chromath.hsv(360*colormod,1,data.intensity);
@@ -33,4 +33,9 @@ module.exports = function draw(model, client, data) {
         return c2a;
       }
     }, model);
+};
+
+module.exports = {
+  features: {color: false},
+  draw: draw,
 };

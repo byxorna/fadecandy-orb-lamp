@@ -1,7 +1,7 @@
 var OPC = require('../opc');
 var chromath = require('chromath');
 
-module.exports = function draw(model, client, data) {
+function draw(model, client, data) {
     var dt = (Date.now()%data.period)/data.period;
     client.mapPixels(function(led){
       var y = led.point[2]; // 0.5 to -0.5
@@ -9,4 +9,9 @@ module.exports = function draw(model, client, data) {
       var c = chromath.hsv(360*v,1,data.intensity);
       return c.toRGBArray();
     }, model);
+};
+
+module.exports = {
+  draw: draw,
+  features: {color:false},
 };

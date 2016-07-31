@@ -1,7 +1,7 @@
 var OPC = require('../opc');
 var chromath = require('chromath');
 
-module.exports = function draw(model, client, data) {
+function draw(model, client, data) {
     var colormod = (Date.now() % (data.period*7))/(data.period*7);
     var c1 = chromath.hsv(360*colormod,1,1);
     var c2 = chromath.complement(c1);
@@ -13,4 +13,9 @@ module.exports = function draw(model, client, data) {
       return chromath.towards(c1, c2, Math.abs(wrapx))
         .darken(1.0-data.intensity).toRGBArray();
     }, model);
+};
+
+module.exports = {
+  features: {color: false},
+  draw: draw,
 };

@@ -7,7 +7,7 @@ var PerlinGenerator = require("proc-noise");
 var Perlin = new PerlinGenerator();
 Perlin.noiseDetail(2, 0.5);
 
-module.exports = function draw(model, client, data) {
+function draw(model, client, data) {
     var now = Date.now()/data.period;
 
     var angle = Math.sin(now); // angle the wind blows the mist at
@@ -30,4 +30,9 @@ module.exports = function draw(model, client, data) {
       var v = (.5+m*m)*data.intensity;
       return chromath.hsv(h, s, v).toRGBArray();
     }, model);
+};
+
+module.exports = {
+  features: {color: false},
+  draw: draw,
 };

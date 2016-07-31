@@ -4,7 +4,7 @@
 var OPC = require('../opc');
 var chromath = require('chromath');
 
-module.exports = function draw(model, client, data) {
+function draw(model, client, data) {
     var dp = data.period * 4;
     var hue_progression = (Date.now() % dp)/dp;
     var c = chromath
@@ -13,4 +13,9 @@ module.exports = function draw(model, client, data) {
       .toRGBArray();
     //console.log("hue progression:",hue_progression, c);
     client.mapPixels(function(_){ return c; }, model);
+};
+
+module.exports = {
+  features: {color: false},
+  draw: draw,
 };

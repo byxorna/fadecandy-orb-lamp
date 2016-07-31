@@ -4,7 +4,7 @@ var numDrops = 50;
 var falloff = 100; // idk what this does
 var particles = [];
 
-module.exports = function draw(model, client, data) {
+function draw(model, client, data) {
     var p = data.period/8;
     var dt = (Date.now()%p)/p;
     var c = chromath.hsv(360*dt,1,data.intensity).toRGBArray();
@@ -24,4 +24,9 @@ module.exports = function draw(model, client, data) {
       }
     }
     client.mapParticles(particles, model);
+};
+
+module.exports = {
+  features: {color: false},
+  draw: draw,
 };
