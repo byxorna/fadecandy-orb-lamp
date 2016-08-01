@@ -11,22 +11,27 @@ function clear_error(){
 // feature
 function set_features_enabled(){
   var featuresmap = {
-    color: 'input#colorinput',
-    period: 'input#period',
-    intensity: 'input#intensity'
+    color: '.form-group:has(input#colorinput)',
+    period: '.form-group:has(input#period)',
+    intensity: '.form-group:has(input#intensity)'
   };
-  //console.log(data);
-  //console.log(patterns);
   for (feature in featuresmap) {
-    var selector = featuresmap[feature];
-    var enabled = true;
+    var selector = $(featuresmap[feature]);
+    var enabled = false;
     if (data.pattern != null) {
       enabled = (patterns[data.pattern]['features'][feature]);
     }
-    //console.log(selector + " is " + enabled.toString() + " " + feature);
     if (enabled) {
-      $(selector).removeAttr('disabled');
-    } else { $(selector).attr('disabled', true); }
+      //$(selector).removeAttr('disabled');
+      if (!selector.is(':visible')){
+        selector.show();
+      }
+    } else {
+      //$(selector).attr('disabled', true);
+      if (selector.is(':visible')){
+        selector.hide();
+      }
+    }
   }
 };
 
@@ -63,7 +68,9 @@ $(function(){
     console.log("Submitting ",t);
     if ( t.attr('id') == 'stop') {
       console.log("Clearing selected pattern");
+      data.pattern = null;
       $('form#patterns select').val(null);
+      set_features_enabled();
     }
     $.get(t.attr('action')).fail(function(x){
       console.log("failed: ", x);

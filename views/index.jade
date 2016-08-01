@@ -47,23 +47,34 @@ html
           form(id='settings' method="post" action="update")
             .row
               .col-lg-6.col-lg-offset-3
-                .form-group
-                  label(for="colorinput") Base Color
-                  - var enabled = data.pattern != null && patterns[data.pattern]['features']['color'];
-                  if enabled
+                - var enabled = data.pattern != null && patterns[data.pattern]['features']['color'];
+                if enabled
+                  .form-group
+                else
+                  .form-group(style="display:none;")
+
+                    label(for="colorinput") Base Color
                     input.color.form-control(id="colorinput" name="color_hex", type="color",value=data.color_hex)
-                  else
-                    input.color.form-control(id="colorinput" name="color_hex", type="color",value=data.color_hex,disabled)
             .row
               .col-lg-6.col-lg-offset-3
-                .form-group
-                  label(for="period") Animation Period
-                  input.period.form-control(id="period" type="range",name="period",min=100,max=12000,step=100,value=data.period)
+                - var enabled = data.pattern != null && patterns[data.pattern]['features']['color'];
+                if enabled
+                  .form-group
+                else
+                  .form-group(style="display:none;")
+
+                    label(for="period") Animation Period
+                    input.period.form-control(id="period" type="range",name="period",min=100,max=12000,step=100,value=data.period)
             .row
               .col-lg-6.col-lg-offset-3
-                .form-group
-                  label(for="intensity") Intensity
-                  input.period.form-control(id="intensity" type="range",name="intensity",min=0.0,max=1.0,step=0.01,value=data.intensity)
+                - var enabled = data.pattern != null && patterns[data.pattern]['features']['color'];
+                if enabled
+                  .form-group
+                else
+                  .form-group(style="display:none;")
+
+                    label(for="intensity") Intensity
+                    input.period.form-control(id="intensity" type="range",name="intensity",min=0.0,max=1.0,step=0.01,value=data.intensity)
           .row
             .col-lg-6.col-lg-offset-3
               form(id='pause' method="get" action="pause")
