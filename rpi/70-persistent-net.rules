@@ -1,0 +1,5 @@
+# make sure the first wifi card has a consistent name, that we use to connecting to external networks
+SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="74:da:38:6d:19:aa", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="wlan*", NAME="ex0"
+# the second interface is for broadcasting an access point
+SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="74:da:38:6d:16:96", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="wlan*", NAME="ap0"
+
