@@ -1,5 +1,4 @@
 var throttle_data_change_ms = 100;
-console.log("got data from server: " , data);
 
 function handle_error(msg){
   $('.message').addClass('alert-danger').text(msg).show();
