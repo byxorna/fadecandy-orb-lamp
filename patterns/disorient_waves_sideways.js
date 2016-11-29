@@ -1,7 +1,6 @@
 var OPC = require('../opc');
 var chromath = require('chromath');
 var pct_bounds = [.18,.70];
-var pct_bounds = [.10,.50];
 
 function draw(model, client, data) {
     var dt      = (Date.now() % data.period) / data.period;
