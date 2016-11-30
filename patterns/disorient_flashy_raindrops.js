@@ -29,25 +29,22 @@ function randomPoint(){
 }
 
 function draw(model, client, data) {
-    var dp = data.period * 4;
-    var hue_progression = (Date.now() % dp)/dp;
-
     var particleLifetimeCycles = 50+.25*Math.ceil(data.period/150); // 30 = .3 seconds at 10ms cycle
     var initialDelayCycles = 50+.25*Math.ceil(data.period/33); // 300 = 3 seconds at 10ms cycle
 
     for (var i = 0; i < numParticles; i++){
       var p = particles[i];
-      var c = chromath
+      p.color = chromath
        .hsv(colors_hue[Math.floor(Math.random()*colors_hue.length)],1,1)
        .darken(1.0-data.intensity)
        .toRGBArray();
-     p.color = c;
+
       if (p.delayTimer) {
         p.delayTimer -= 1;
         if (p.delayTimer <= 0) {
           // delay over, lets start blooming
           // distribute lifetime a bit (25% variance)
-          p.lifeTimer = particleLifetimeCycles;// + particleLifetimeCycles*Math.random()*0.25;
+          p.lifeTimer = particleLifetimeCycles;
           p.point = randomPoint();
           p.delayTimer = null;
         }
@@ -56,8 +53,6 @@ function draw(model, client, data) {
       if (p.lifeTimer) {
         // change the intensity over the lifetime of the particle
         p.intensity = -1.2*Math.sin(p.lifeTimer * 2 * Math.PI / particleLifetimeCycles);
-        //p.intensity = -0.5*Math.cos(p.lifeTimer * 2 * Math.PI / particleLifetimeCycles) + 0.5;
-        //TODO move the point?
 
         p.lifeTimer -= 1;
         if (p.lifeTimer <= 0) {
