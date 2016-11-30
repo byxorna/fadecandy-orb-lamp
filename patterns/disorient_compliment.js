@@ -1,7 +1,7 @@
 var OPC = require('../opc');
 var chromath = require('chromath');
 
-module.exports = function draw(model, client, data) {
+function draw(model, client, data) {
     var c1 = chromath.hsv(296,1,1);
     var c2 = chromath.hsv(34,1,1);
 
