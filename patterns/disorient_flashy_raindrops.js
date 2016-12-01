@@ -34,10 +34,12 @@ function draw(model, client, data) {
 
     for (var i = 0; i < numParticles; i++){
       var p = particles[i];
-      p.color = chromath
-       .hsv(colors_hue[Math.floor(Math.random()*colors_hue.length)],1,1)
-       .darken(1.0-data.intensity)
-       .toRGBArray();
+      if (p.color != [0,0,0]) {
+        p.color = chromath
+         .hsv(colors_hue[Math.floor(Math.random()*colors_hue.length)],1,1)
+         .darken(1.0-data.intensity)
+         .toRGBArray();
+      }
 
       if (p.delayTimer) {
         p.delayTimer -= 1;
@@ -58,6 +60,12 @@ function draw(model, client, data) {
         if (p.lifeTimer <= 0) {
           p.delayTimer = initialDelayCycles + initialDelayCycles*Math.random();
           p.lifeTimer = null;
+
+          // pick a new color for it next bloom
+          p.color = chromath
+           .hsv(colors_hue[Math.floor(Math.random()*colors_hue.length)],1,1)
+           .darken(1.0-data.intensity)
+           .toRGBArray();
         }
       }
 
