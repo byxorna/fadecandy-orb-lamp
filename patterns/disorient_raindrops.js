@@ -34,12 +34,6 @@ function draw(model, client, data) {
 
     for (var i = 0; i < numParticles; i++){
       var p = particles[i];
-      //if (p.color != [0,0,0]) {
-      //  p.color = chromath
-      //   .hsv(colors_hue[Math.floor(Math.random()*colors_hue.length)],1,1)
-      //   .darken(1.0-data.intensity)
-      //   .toRGBArray();
-      //}
 
       if (p.delayTimer) {
         p.delayTimer -= 1;
