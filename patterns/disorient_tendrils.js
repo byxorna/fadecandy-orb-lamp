@@ -12,7 +12,7 @@ function draw(model, client, data) {
     for (var d = 0; d < 2 ; d++){
       for (var i = 0; i < numParticles; i++) {
           var s = 1;
-          var theta = (0.001*Date.now()) + 0.02 * i;
+          var theta = 10*Date.now()/(data.period) + 0.02 * i;
           if  (d%2 == 0) {
             // one moves a bit slower
             var x = 1.0 - (theta*0.8)%2.0;
